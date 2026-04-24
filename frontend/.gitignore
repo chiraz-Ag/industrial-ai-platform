@@ -1,30 +1,31 @@
-<<<<<<< HEAD
-data/
-*.txt
-*.csv
-*.zip
+# Python
+__pycache__/
+*.pyc
+*.pyo
 *.h5
 *.pkl
 *.pt
-__pycache__/
-*.pyc
+*.zip
+*.csv
+*.txt
+data/
 .ipynb_checkpoints/
-=======
-# Logs
-logs
-*.log
+
+# Secrets
+.env
+backend/.env
+
+# Node
+node_modules/
+dist
+dist-ssr
+*.local
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# Editor
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -34,4 +35,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
->>>>>>> 8514438c4994793bd34c7f6f92fcef7afbd8ca77

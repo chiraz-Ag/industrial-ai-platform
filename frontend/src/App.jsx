@@ -1,8 +1,27 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { supabase } from "./lib/supabase";
+
 import Welcome from "./pages/Welcome";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 import { useTheme } from "./hooks/useTheme";
 import "./index.css";
+
+function GoogleTokenHandler() {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        localStorage.setItem("token", session.access_token);
+        window.history.replaceState({}, document.title, "/dashboard");
+      }
+    });
+  }, []);
+
+  return null;
+}
 
 function App() {
   const { theme, toggle } = useTheme();
@@ -10,42 +29,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={<Welcome theme={theme} toggleTheme={toggle} />}
-        />
-        <Route
-          path="/dashboard"
-          element={<Dashboard theme={theme} toggleTheme={toggle} />}
-        />
-        <Route
-          path="/login"
-          element={
-            <div
-              style={{
-                color: "var(--text)",
-                padding: "100px",
-                textAlign: "center",
-              }}
-            >
-              Login — coming soon
-            </div>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <div
-              style={{
-                color: "var(--text)",
-                padding: "100px",
-                textAlign: "center",
-              }}
-            >
-              Register — coming soon
-            </div>
-          }
-        />
+        <Route path="/" element={<Welcome theme={theme} toggleTheme={toggle} />} />
+
+        <Route path="/dashboard" element={
+          <>
+            <GoogleTokenHandler />
+            <Dashboard theme={theme} toggleTheme={toggle} />
+          </>
+        } />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
