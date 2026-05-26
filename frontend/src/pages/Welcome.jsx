@@ -1128,7 +1128,7 @@ function Welcome({ theme, toggleTheme }) {
           </span>
         </div>
         <span style={{ fontSize: "13px", color: "var(--text2)" }}>
-          © 2025 AxialAI · Predictive Maintenance Platform
+          © 2026 AxialAI · Predictive Maintenance Platform
         </span>
         <span
           style={{ fontSize: "13px", color: "var(--text2)", cursor: "pointer" }}

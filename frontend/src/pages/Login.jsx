@@ -14,13 +14,15 @@ function BackgroundCanvas() {
     resize();
     window.addEventListener("resize", resize);
     const particles = Array.from({ length: 80 }, () => ({
-      x: Math.random(), y: Math.random(),
+      x: Math.random(),
+      y: Math.random(),
       size: Math.random() * 2 + 0.5,
       speed: Math.random() * 0.0007 + 0.0002,
       opacity: Math.random() * 0.35 + 0.1,
     }));
     const draw = () => {
-      const W = canvas.width, H = canvas.height;
+      const W = canvas.width,
+        H = canvas.height;
       ctx.clearRect(0, 0, W, H);
       const bg = ctx.createLinearGradient(0, 0, W, H);
       bg.addColorStop(0, "#020617");
@@ -29,7 +31,10 @@ function BackgroundCanvas() {
       ctx.fillRect(0, 0, W, H);
       particles.forEach((p) => {
         p.y -= p.speed;
-        if (p.y < 0) { p.y = 1; p.x = Math.random(); }
+        if (p.y < 0) {
+          p.y = 1;
+          p.x = Math.random();
+        }
         ctx.beginPath();
         ctx.arc(p.x * W, p.y * H, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(56,189,248,${p.opacity})`;
@@ -43,7 +48,12 @@ function BackgroundCanvas() {
       window.removeEventListener("resize", resize);
     };
   }, []);
-  return <canvas ref={canvasRef} style={{ position: "fixed", inset: 0, zIndex: 0 }} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{ position: "fixed", inset: 0, zIndex: 0 }}
+    />
+  );
 }
 
 export default function Login() {
@@ -62,7 +72,10 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (!res.ok) { setError(data.detail || "Login failed"); return; }
+      if (!res.ok) {
+        setError(data.detail || "Login failed");
+        return;
+      }
       localStorage.setItem("token", data.access_token);
       window.location.href = "/dashboard";
     } catch {
@@ -73,17 +86,17 @@ export default function Login() {
   };
 
   const handleGoogleLogin = async () => {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: "http://localhost:5173/dashboard",
-      queryParams: {
-        prompt: "select_account",  // ← force le choix du compte
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "http://localhost:5173/dashboard",
+        queryParams: {
+          prompt: "select_account", // ← force le choix du compte
+        },
       },
-    },
-  });
-  if (error) setError("Google login failed");
-};
+    });
+    if (error) setError("Google login failed");
+  };
 
   return (
     <>
@@ -112,42 +125,103 @@ export default function Login() {
       <div className="wrap">
         <div className="card">
           <div style={{ textAlign: "center", marginBottom: "26px" }}>
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "10px",
+              }}
+            >
               <svg width="40" height="40" viewBox="0 0 36 36">
-                <circle cx="18" cy="18" r="17" fill="none" stroke="#38bdf8" strokeWidth="1.5" />
+                <circle
+                  cx="18"
+                  cy="18"
+                  r="17"
+                  fill="none"
+                  stroke="#38bdf8"
+                  strokeWidth="1.5"
+                />
                 <circle cx="18" cy="18" r="3" fill="#38bdf8" />
-                {[0,45,90,135,180,225,270,315].map((angle, i) => {
+                {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
                   const rad = (angle * Math.PI) / 180;
-                  const x1 = 18 + 5 * Math.cos(rad), y1 = 18 + 5 * Math.sin(rad);
-                  const x2 = 18 + 13 * Math.cos(rad), y2 = 18 + 13 * Math.sin(rad);
-                  const cx1 = 18 + 7 * Math.cos(rad - 0.4), cy1 = 18 + 7 * Math.sin(rad - 0.4);
-                  return <path key={i} d={`M ${x1} ${y1} Q ${cx1} ${cy1} ${x2} ${y2}`} fill="none" stroke="#38bdf8" strokeWidth={i % 2 === 0 ? "1.6" : "1"} opacity={i % 2 === 0 ? "1" : "0.5"} />;
+                  const x1 = 18 + 5 * Math.cos(rad),
+                    y1 = 18 + 5 * Math.sin(rad);
+                  const x2 = 18 + 13 * Math.cos(rad),
+                    y2 = 18 + 13 * Math.sin(rad);
+                  const cx1 = 18 + 7 * Math.cos(rad - 0.4),
+                    cy1 = 18 + 7 * Math.sin(rad - 0.4);
+                  return (
+                    <path
+                      key={i}
+                      d={`M ${x1} ${y1} Q ${cx1} ${cy1} ${x2} ${y2}`}
+                      fill="none"
+                      stroke="#38bdf8"
+                      strokeWidth={i % 2 === 0 ? "1.6" : "1"}
+                      opacity={i % 2 === 0 ? "1" : "0.5"}
+                    />
+                  );
                 })}
               </svg>
             </div>
-            <div style={{ fontSize: "40px", fontWeight: "800", color: "#f0f9ff", letterSpacing: "2px", marginBottom: "8px" }}>
+            <div
+              style={{
+                fontSize: "40px",
+                fontWeight: "800",
+                color: "#f0f9ff",
+                letterSpacing: "2px",
+                marginBottom: "8px",
+              }}
+            >
               Axial<span style={{ color: "#38bdf8" }}>AI</span>
             </div>
-            <div style={{ fontSize: "12px", color: "rgba(148,163,184,0.7)", letterSpacing: "0.08em" }}>
-              Predictive Maintenance & NLP Diagnostics Platform
+            <div
+              style={{
+                fontSize: "12px",
+                color: "rgba(148,163,184,0.7)",
+                letterSpacing: "0.08em",
+              }}
+            >
+              Start analyzing your engine fleet and predicting failures before
+              they happen.
             </div>
           </div>
 
           {error && <div className="error">⚠️ {error}</div>}
 
-          <input className="input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input className="input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleLogin()} />
+          <input
+            className="input"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className="input"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+          />
 
-          <div className="forgot"><a onClick={() => window.location.href = "/forgot-password"}>Forgot password?</a></div>
+          <div className="forgot">
+            <a onClick={() => (window.location.href = "/forgot-password")}>
+              Forgot password?
+            </a>
+          </div>
 
           <button className="btn" onClick={handleLogin} disabled={loading}>
             {loading ? "Signing in..." : "Sign in"}
           </button>
 
-          <div className="divider"><span>OR</span></div>
+          <div className="divider">
+            <span>OR</span>
+          </div>
 
           <button className="google-btn" onClick={handleGoogleLogin}>
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" />
+            <img
+              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+              width="18"
+            />
             Sign in with Google
           </button>
 
