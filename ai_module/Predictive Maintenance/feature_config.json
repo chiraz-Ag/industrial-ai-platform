@@ -1,0 +1,93 @@
+{
+  "sensors_to_keep": [
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_17",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "sensors_to_drop": [
+    "sensor_01",
+    "sensor_05",
+    "sensor_06",
+    "sensor_10",
+    "sensor_16",
+    "sensor_18",
+    "sensor_19"
+  ],
+  "rul_cap": 125,
+  "std_threshold": 0.01,
+  "corr_threshold": 0.15,
+  "window_size": 30,
+  "n_features": 14,
+  "feature_cols": [
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_17",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "scaler": "MinMaxScaler",
+  "X_train_shape": [
+    17731,
+    30,
+    14
+  ],
+  "X_test_shape": [
+    100,
+    30,
+    14
+  ],
+  "gru_metrics": {
+    "validation": {
+      "model": "GRU ",
+      "rmse": 11.62151391047178,
+      "mae": 8.177387237548828,
+      "r2": 0.9225295782089233,
+      "nasa": 7195.728515625
+    },
+    "test": {
+      "model": "GRU ",
+      "rmse": 13.585680300541288,
+      "mae": 10.008331298828125,
+      "r2": 0.8850647807121277,
+      "nasa": 327.5636291503906
+    },
+    "epochs_trained": 51
+  },
+  "cnn_metrics": {
+    "validation": {
+      "model": "CNN ",
+      "rmse": 15.581466209359068,
+      "mae": 11.834085464477539,
+      "r2": 0.8607397675514221,
+      "nasa": 18510.380859375
+    },
+    "test": {
+      "model": "CNN ",
+      "rmse": 16.606998191004166,
+      "mae": 12.333182334899902,
+      "r2": 0.8282595276832581,
+      "nasa": 613.1337890625
+    },
+    "epochs_trained": 100
+  }
+}

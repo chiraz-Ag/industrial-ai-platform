@@ -1,0 +1,53 @@
+{
+  "dataset": "FD003",
+  "sensors_to_keep": [
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_17",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "sensors_to_drop": [
+    "sensor_01",
+    "sensor_05",
+    "sensor_06",
+    "sensor_10",
+    "sensor_16",
+    "sensor_18",
+    "sensor_19"
+  ],
+  "feature_cols": [
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_17",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "n_features": 14,
+  "window_size": 30,
+  "rul_cap": 125,
+  "n_train_engines": 100,
+  "n_test_engines": 100,
+  "operating_conditions": 1,
+  "fault_modes": 2,
+  "scaler": "global_minmax",
+  "note": "Settings supprim\u00e9s (1 condition) \u2014 2 modes de panne"
+}
